@@ -8,9 +8,9 @@ This is an open source and self-hosted alternative to services such as AddThis a
 
 Because you run the middle man server your self, you are also defending your users privacy against the social networks. (Users only opt into the tracking once they decide to share and not just because they visited your page)
 
-[Example API Call](http://social-buttons-server.herokuapp.com/?networks=facebook,twitter,googleplus&url=http://1984day.com)
-[Example API Call with Buttons](http://tfrce.github.io/social-buttons-server/examples/buttons.html)
-[Example API Call with Text (fast)](http://tfrce.github.io/social-buttons-server/examples/text.html)
+* [Example API Call](http://social-buttons-server.herokuapp.com/?networks=facebook,twitter,googleplus&url=http://1984day.com)
+* [Example API Call with Buttons](http://tfrce.github.io/social-buttons-server/examples/buttons.html)
+* [Example API Call with Text (fast)](http://tfrce.github.io/social-buttons-server/examples/text.html)
 
 ## Features
 * Heroku enabled, create an app and deploy instantly
@@ -22,6 +22,7 @@ Because you run the middle man server your self, you are also defending your use
 2. Install dependencies ```npm install```
 3. Run the server ```node social-buttons-server.js```
 4. Access your stats at ```http://localhost:5000/?networks=facebook,twitter,googleplus&url=http://1984day.com```
+5. __Optionally push to a heroku app to automatically deploy__
 
 ## Options
 
