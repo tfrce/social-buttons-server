@@ -1,0 +1,29 @@
+<html>
+	<head>
+  <link href="style.css" rel="stylesheet">
+	</head>
+	<body>
+    <div class="down sharecenter social-container" style="width: 248px">
+      <a data-count="0" href="https://twitter.com/home?status=Test"  target="_blank" id="twitter" class="twitter-button social-count">
+        <div id="stwit"></div>
+      </a>
+      <a data-count="0" href="https://www.facebook.com/share.php?u=Test" id="facebook" target="_blank" class="social-count facebook-button">
+        <div id="sfb"></div>
+      </a>
+      <a data-count="0" href="https://plus.google.com/share?url=Test" id="googleplus" target="_blank" class="social-count google-button"> 
+        <div id="sgplus"></div>
+      </a>
+  </div>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+  <script type="text/javascript">
+    $.ajax('http://d28jjwuneuxo3n.cloudfront.net/?networks=facebook,twitter,googleplus&url=http://1984day.com', {
+      success: function (res, err) {
+        $.each(res, function(network, value){
+          $('#'+network).attr('data-count', value);
+        })      
+      }
+    })
+  </script>
+	</body>
+</html>

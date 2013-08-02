@@ -1,0 +1,23 @@
+<html>
+	<head>
+	</head>
+	<body>
+		<h3>Twitter</h3>
+    <span id="twitter"></span>
+    <h3>Facebook</h3>
+    <span id="facebook"></span>
+    <h3>Google Plus</h3>
+    <span id="googleplus"></span>
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+  <script type="text/javascript">
+    $.ajax('http://d28jjwuneuxo3n.cloudfront.net/?networks=facebook,twitter,googleplus&url=http://1984day.com', {
+      success: function (res, err) {
+        $.each(res, function(network, value){
+          $('#'+network).text(value);
+        })      
+      }
+    })
+  </script>
+	</body>
+</html>
