@@ -36,7 +36,7 @@ app.get('/', function(req, res) {
     url = req.query.url;
   } else {
     url = req.header('Referer');
-    if(typeof options.url === 'undefined') {
+    if(typeof url === 'undefined') {
       res.send({error: 'You asked for the referring urls stats but there is no referring url, try specify one manually (&url=http://1984day.com)'});
       return;
     }
