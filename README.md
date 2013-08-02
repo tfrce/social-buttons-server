@@ -1,6 +1,5 @@
 # Social Buttons Server
 
-Built by the [RRITF](http://taskforce.is) for the recent [1984Day campaign](http://1984day.com)
 
 Install social share counters on your website with your own hosted solution which only makes 1 API request and loads minimal or zero assets to display the counters.
 
@@ -11,6 +10,8 @@ Because you run the middle man server your self, you are also defending your use
 * [Example API Call](http://social-buttons-server.herokuapp.com/?networks=facebook,twitter,googleplus&url=http://1984day.com)
 * [Example API Call with Buttons](http://tfrce.github.io/social-buttons-server/examples/button.html)
 * [Example API Call with Text (fast)](http://tfrce.github.io/social-buttons-server/examples/text.html)
+
+Built by the [RRITF](http://taskforce.is) for the recent [1984Day campaign](http://1984day.com)
 
 ## Features
 * Heroku enabled, create an app and deploy instantly
