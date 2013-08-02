@@ -46,7 +46,7 @@ app.get('/', function(req, res) {
   // All results will be sent to the browser on completion.
   var networksToRequest = {};
   _.each(networks.split(','), function(network){
-    if(networkCallbacks[network] !== 'undefined') {
+    if(typeof networkCallbacks[network] !== 'undefined') {
       networksToRequest[network] = function (callback) {
         networkCallbacks[network](url, callback);
       }
