@@ -31,14 +31,14 @@ Currently only Twitter, Facebook and Google Plus are supported
 
 You use the ```networks``` query parameter to specify which ones you want to use as a common separated list e.g.
 
-```?networks=facebook```
+```networks=facebook,twitter,googleplus```
 
 or
 
-```?networks=facebook```
+```networks=facebook```
 
 ### Url
 
-You use the ```url``` parameter to specify the address which you want to count the total number of shares for e.g. ```?url=http://1984day.com```
+You use the ```url``` parameter to specify the address which you want to count the total number of shares for e.g. ```url=http://1984day.com```
 
 If you don't specify a ```url``` then the server will try to get the referring urls total share count. So if you make the API call on your homepage without the ```url``` parameter, the API server will return the numbe rof shares for your homepage url.
