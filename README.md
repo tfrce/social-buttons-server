@@ -9,8 +9,8 @@ This is an open source and self-hosted alternative to services such as AddThis a
 Because you run the middle man server your self, you are also defending your users privacy against the social networks. (Users only opt into the tracking once they decide to share and not just because they visited your page)
 
 [Example API Call](http://social-buttons-server.herokuapp.com/?networks=facebook,twitter,googleplus&url=http://1984day.com)
-[Example API Call with Buttons](http://social-buttons-server.herokuapp.com/?networks=facebook,twitter,googleplus&url=http://1984day.com)
-[Example API Call with Text (fast)](http://social-buttons-server.herokuapp.com/?networks=facebook,twitter,googleplus&url=http://1984day.com)
+[Example API Call with Buttons](http://tfrce.github.io/social-buttons-server/examples/buttons.html)
+[Example API Call with Text (fast)](http://tfrce.github.io/social-buttons-server/examples/text.html)
 
 ## Features
 * Heroku enabled, create an app and deploy instantly
@@ -52,3 +52,35 @@ Eithr use your CloudFront url to access the API server or cname it with a custom
 ## Cross domain
 
 The server as it is has CORS enabled which means any website can call the API SERVER. You can easily white list if this becomes a problem.
+
+## HTML Widgets
+
+**We would love to start collecting widgets that people design and want to share, please submit them in a pull request to the `gh-pages` branch and we will create a new section to list them**
+
+You can do anything you want to display your share totals when using the API. There are the examples linked at the top of the README and some short code below. Notice that we are using a CloudFront distribution in the examples.
+
+```
+<html>
+	<head>
+	</head>
+	<body>
+		<h3>Twitter</h3>
+    <span id="twitter"></span>
+    <h3>Facebook</h3>
+    <span id="facebook"></span>
+    <h3>Google Plus</h3>
+    <span id="googleplus"></span>
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+  <script type="text/javascript">
+    $.ajax('http://d28jjwuneuxo3n.cloudfront.net/?networks=facebook,twitter,googleplus&url=http://1984day.com', {
+      success: function (res, err) {
+        $.each(res, function(network, value){
+          $('#'+network).text(value);
+        })      
+      }
+    })
+  </script>
+	</body>
+</html>
+```
