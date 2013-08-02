@@ -31,7 +31,7 @@ Currently only Twitter, Facebook and Google Plus are supported
 
 You use the ```networks``` query parameter to specify which ones you want to use as a common separated list e.g.
 
-```?networks=facebook,twitter,googleplus```
+```?networks=facebook```
 
 or
 
