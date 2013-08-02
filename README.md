@@ -6,9 +6,11 @@ Install social share counters on your website with your own hosted solution whic
 
 This is an open source and self-hosted alternative to services such as AddThis and ShareThis. 
 
-Because you run the middle man server your self, you are also defending your users privacies against the social networks. (Users only opt into the tracking once they decide to share and not just because they visited your page)
+Because you run the middle man server your self, you are also defending your users privacy against the social networks. (Users only opt into the tracking once they decide to share and not just because they visited your page)
 
 [Example API Call](http://social-buttons-server.herokuapp.com/?networks=facebook,twitter,googleplus&url=http://1984day.com)
+[Example API Call with Buttons](http://social-buttons-server.herokuapp.com/?networks=facebook,twitter,googleplus&url=http://1984day.com)
+[Example API Call with Text (fast)](http://social-buttons-server.herokuapp.com/?networks=facebook,twitter,googleplus&url=http://1984day.com)
 
 ## Features
 * Heroku enabled, create an app and deploy instantly
@@ -38,3 +40,15 @@ You use the ```networks``` query parameter to specify which ones you want to use
 You use the ```url``` parameter to specify the address which you want to count the total number of shares for e.g. ```url=http://1984day.com```
 
 If you don't specify a ```url``` then the server will try to get the referring urls total share count. So if you make the API call on your homepage without the ```url``` parameter, the API server will return the numbe rof shares for your homepage url.
+
+## CloudFront
+
+You don't want to be hitting the social networks API's constantly so it would be wise to throw up a cache in front such as CloudFront.
+
+In CloudFront just make sure you to inherit cache control directives from the server and enable query string forwarding.
+
+Eithr use your CloudFront url to access the API server or cname it with a custom domain of your choice.
+
+## Cross domain
+
+The server as it is has CORS enabled which means any website can call the API SERVER. You can easily white list if this becomes a problem.
