@@ -1,6 +1,6 @@
 # Social Buttons Server
 
-[Custom buttons](http://tfrce.github.io/social-buttons-server/screenshot.png "Custom buttons")
+![Custom buttons](http://tfrce.github.io/social-buttons-server/screenshot.png "Custom buttons")
 
 Built by the [RRITF](http://taskforce.is) for the recent [1984Day campaign](http://1984day.com)
 
