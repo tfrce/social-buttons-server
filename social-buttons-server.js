@@ -53,7 +53,7 @@ app.get('/', function(req, res) {
     }
   });
   async.parallel(networksToRequest, function (err, results) {
-    res.send(results);
+    res.jsonp(results);
   });
 });
 
