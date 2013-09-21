@@ -11,26 +11,12 @@ app.use(express.logger());
 var cacheTime = 4; // How many minutes should we cache the results for a given request
 
 app.all('/*', function(req, res, next) {
-  var allowedHost = [
-    'http://dev.stopwatching.us',
-    'http://rally.stopwatching.us',
-    'http://2.stopwatching.us',
-    'http://localhost:4000',
-    'https://dev.stopwatching.us',
-    'https://rally.stopwatching.us',
-    'https://2.stopwatching.us',
-    'https://localhost:4000'
-  ];
-  if(allowedHost.indexOf(req.headers.origin) !== -1 ) {
   // Allow the request to be pulled cross domain
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "X-Requested-With");
   // Setup caching headers (works well with cloudfront)
   res.setHeader("Expires", new Date(Date.now() + cacheTime * 60 * 1000).toUTCString());
   next();
-} else {
-res.send({error: "If you want to use this service, push it up to your own heroku account, otherwise the social networks will black list it"});
-}
 });
 
 
@@ -54,6 +40,10 @@ app.get('/', function(req, res) {
       res.send({error: 'You asked for the referring urls stats but there is no referring url, try specify one manually (&url=http://1984day.com)'});
       return;
     }
+  }
+  if(url.indexOf('stopwatching.us') !== -1 || url.indexOf('1984day.com') !== -1){
+    res.send({error: "Please install this open source module on your own heroku server"})
+    return;
   }
   // Create an object of callbacks for each of the requested networks
   // It is then passed to the async library to executed in parallel 
