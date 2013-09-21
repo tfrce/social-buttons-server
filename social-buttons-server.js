@@ -41,7 +41,8 @@ app.get('/', function(req, res) {
       return;
     }
   }
-  if(url.indexOf('stopwatching.us') !== -1 || url.indexOf('1984day.com') !== -1){
+  console.log(url.indexOf('stopwatching.us'));
+  if(url.indexOf('stopwatching.us') === -1){
     res.send({error: "Please install this open source module on your own heroku server"})
     return;
   }
