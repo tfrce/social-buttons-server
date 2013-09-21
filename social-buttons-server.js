@@ -12,11 +12,26 @@ var cacheTime = 4; // How many minutes should we cache the results for a given r
 
 app.all('/*', function(req, res, next) {
   // Allow the request to be pulled cross domain
-  res.header("Access-Control-Allow-Origin", "*");
+ 
+  var allowedHost = [
+    'http://dev.stopwatching.us',
+    'http://rally.stopwatching.us',
+    'http://2.stopwatching.us',
+    'http://localhost:4000',
+    'https://dev.stopwatching.us',
+    'https://rally.stopwatching.us',
+    'https://2.stopwatching.us',
+    'https://localhost:4000'
+  ];
+if(allowedHost.indexOf(req.headers.origin) !== -1 ) {
+ res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "X-Requested-With");
   // Setup caching headers (works well with cloudfront)
   res.setHeader("Expires", new Date(Date.now() + cacheTime * 60 * 1000).toUTCString());
   next();
+} else {
+res.send({});
+}
 });
 
 
