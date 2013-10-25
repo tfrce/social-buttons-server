@@ -7,11 +7,10 @@ This is an open source and self-hosted alternative to services such as AddThis a
 
 Because you run the middle man server your self, you are also defending your users privacy against the social networks. (Users only opt into the tracking once they decide to share and not just because they visited your page)
 
-* [Example API Call](http://social-buttons-server.herokuapp.com/?networks=facebook,twitter,googleplus&url=http://1984day.com)
+* [Example API Call](http://social-buttons-server.herokuapp.com/?networks=facebook,twitter,googleplus&url=https://rally.stopwatching.us)
 * [Example API Call with Buttons](http://tfrce.github.io/social-buttons-server/examples/button.html)
 * [Example API Call with Text (fast)](http://tfrce.github.io/social-buttons-server/examples/text.html)
 
-Built by the [RRITF](http://taskforce.is) for the recent [1984Day campaign](http://1984day.com)
 
 ## Features
 * Heroku enabled, create an app and deploy instantly
@@ -22,7 +21,7 @@ Built by the [RRITF](http://taskforce.is) for the recent [1984Day campaign](http
 1. Clone(or fork) the repository
 2. Install dependencies ```npm install```
 3. Run the server ```node social-buttons-server.js```
-4. Access your stats at ```http://localhost:5000/?networks=facebook,twitter,googleplus&url=http://1984day.com```
+4. Access your stats at ```http://localhost:5000/?networks=facebook,twitter,googleplus&url=https://rally.stopwatching.us```
 5. __Optionally push to a heroku app to automatically deploy__
 
 ## Options
@@ -33,7 +32,7 @@ Options are passed through query parameters in the url
 
 Currently only Twitter, Facebook and Google Plus are supported
 
-You use the ```networks``` query parameter to specify which ones you want to use as a common separated list e.g.
+You use the ```networks``` query parameter to specify which ones you want to use as a comma-separated list e.g.
 
 ```networks=facebook,twitter,googleplus``` or  ```networks=facebook```
 
@@ -75,7 +74,7 @@ You can do anything you want to display your share totals when using the API. Th
 
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
   <script type="text/javascript">
-    $.ajax('http://d28jjwuneuxo3n.cloudfront.net/?networks=facebook,twitter,googleplus&url=http://1984day.com', {
+    $.ajax('http://d28jjwuneuxo3n.cloudfront.net/?networks=facebook,twitter,googleplus&url=https://rally.stopwatching.us', {
       success: function (res, err) {
         $.each(res, function(network, value){
           $('#'+network).text(value);
