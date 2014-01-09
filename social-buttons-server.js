@@ -21,7 +21,9 @@ app.all('/*', function(req, res, next) {
     'https://dev.stopwatching.us',
     'https://rally.stopwatching.us',
     'https://2.stopwatching.us',
-    'https://localhost:4000'
+    'https://localhost:4000',
+    'https://thedaywefightback.org',
+    'http://thedaywefightback.org'
   ];
 if(allowedHost.indexOf(req.headers.origin) !== -1 ) {
  res.header("Access-Control-Allow-Origin", "*");
