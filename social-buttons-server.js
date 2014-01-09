@@ -58,6 +58,11 @@ app.get('/', function(req, res) {
       return;
     }
   }
+  console.log(url.indexOf('stopwatching.us'));
+  if(url.indexOf('stopwatching.us') === -1){
+    res.send({error: "Please install this open source module on your own heroku server"})
+    return;
+  }
   // Create an object of callbacks for each of the requested networks
   // It is then passed to the async library to executed in parallel 
   // All results will be sent to the browser on completion.
@@ -70,7 +75,7 @@ app.get('/', function(req, res) {
     }
   });
   async.parallel(networksToRequest, function (err, results) {
-    res.send(results);
+    res.jsonp(results);
   });
 });
 
