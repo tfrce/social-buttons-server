@@ -10,7 +10,6 @@
     "async": "~0.2.10",
     "cors": "~2.1.1",
     "express": "~3.4.8",
-    "lodash": "~2.4.1",
     "request": "~2.33.0"
   },
   "engines": {
