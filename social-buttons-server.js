@@ -60,6 +60,10 @@ var networkCallbacks = {
     var apiUrl = 'http://urls.api.twitter.com/1/urls/count.json?url=' + url;
 
     request.get({ url: apiUrl, json: true }, function (err, res, body) {
+      if (err) {
+        return callback(null, 0);
+      }
+
       callback(null, body.count);
     });
   },
@@ -72,6 +76,10 @@ var networkCallbacks = {
       '%20click_count%20FROM%20link_stat%20WHERE%20url="' + url + '"';
 
     request.get({ url: apiUrl, json: true }, function (err, res, body) {
+      if (err) {
+        return callback(null, 0);
+      }
+
       var count = 0;
 
       if (body.data.length > 0) {
@@ -87,6 +95,10 @@ var networkCallbacks = {
     var apiUrl = 'https://plusone.google.com/_/+1/fastbutton?url=' + url;
 
     request.get(apiUrl, function (err, res, body) {
+      if (err) {
+        return callback(null, 0);
+      }
+
       var result = /__SSR \= \{c\: (.*?)\.0/g.exec(body);
       var count = 0;
 
@@ -139,10 +151,6 @@ app.get('/', function (req, res) {
   });
 
   async.parallel(networksToRequest, function (err, results) {
-    if (err && !results) {
-      return res.jsonp({ error: err });
-    }
-
     res.jsonp(results);
   });
 });
