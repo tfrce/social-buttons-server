@@ -5,7 +5,8 @@
     "express": "~3.4.8",
     "superagent": "~0.16.0",
     "async": "~0.2.10",
-    "lodash": "~2.4.1"
+    "lodash": "~2.4.1",
+    "cors": "~2.1.1"
   },
   "engines": {
     "node": "0.10.x",
