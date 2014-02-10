@@ -1,7 +1,7 @@
 var async = require('async');
 var cors = require('cors');
 var express = require('express');
-var request = require('superagent');
+var request = require('request');
 
 // How many minutes should we cache the results for a given request
 var CACHE_TIME = process.env.CACHE_TIME || 4;
@@ -47,11 +47,10 @@ var networkCallbacks = {
   twitter: function (url, callback) {
     // Twitter is nice and easy
     var apiUrl = 'http://urls.api.twitter.com/1/urls/count.json?url=' + url;
-    request.get(apiUrl)
-      .set('Accept', 'application/json')
-      .end(function (data) {
-        callback(null, data.body.count);
-      });
+
+    request.get({ url: apiUrl, json: true }, function (err, res, body) {
+      callback(null, body.count);
+    });
   },
   facebook: function (url, callback) {
     // This query string gets the total number of likes, shares and comments to
@@ -61,59 +60,53 @@ var networkCallbacks = {
       '%20total_count,commentsbox_count,%20comments_fbid,' +
       '%20click_count%20FROM%20link_stat%20WHERE%20url="' + url + '"';
 
-    request.get(apiUrl)
-      .set('Accept', 'application/json')
-      .end(function (data) {
-        var count = 0;
+    request.get({ url: apiUrl, json: true }, function (err, res, body) {
+      var count = 0;
 
-        if (data.body.data.length > 0) {
-          count = data.body.data[0].total_count;
-        }
+      if (body.data.length > 0) {
+        count = body.data[0].total_count;
+      }
 
-        callback(null, count);
-      });
+      callback(null, count);
+    });
   },
   googleplus: function (url, callback) {
     // This is a hacky method found on the internet because google doesn't have
     // an API for google plus counts
     var apiUrl = 'https://plusone.google.com/_/+1/fastbutton?url=' + url;
 
-    request.get(apiUrl)
-      .end(function (data) {
-        var reg = /__SSR \= \{c\: (.*?)\.0/g;
-        var result = reg.exec(data.text);
-        var count = 0;
+    request.get(apiUrl, function (err, res, body) {
+      var result = /__SSR \= \{c\: (.*?)\.0/g.exec(body);
+      var count = 0;
 
-        if (result) {
-          count = result[1] * 1;
-        }
+      if (result) {
+        count = result[1] * 1;
+      }
 
-        callback(null, count);
-      });
+      callback(null, count);
+    });
   }
 };
 
 app.get('/', function (req, res) {
-  var networks, url;
+  var url;
 
   // Check to see if any networks were specified in the query
-  if (typeof req.query.networks === 'undefined') {
+  if (!req.param('networks')) {
     return res.send({
       error: 'You have to specify which networks you want stats for ' +
         '(networks=facebook,twitter,googleplus)'
     });
   }
 
-  networks = req.query.networks;
-
   // Check to see if a url was specified in the query else attempt to use the
   // referer url
-  if (typeof req.query.url !== 'undefined') {
-    url = req.query.url;
+  if (!req.param('url')) {
+    url = req.param('url');
   } else {
     url = req.header('Referer');
 
-    if (typeof url === 'undefined') {
+    if (!url) {
       return res.send({
         error: 'You asked for the referring urls stats but there is no ' +
           'referring url, specify one manually (&url=http://1984day.com)'
@@ -126,7 +119,7 @@ app.get('/', function (req, res) {
   // be sent to the browser on completion.
   var networksToRequest = {};
 
-  networks.split(',').forEach(function (network) {
+  req.param('networks').split(',').forEach(function (network) {
     if (typeof networkCallbacks[network] !== 'undefined') {
       networksToRequest[network] = function (callback) {
         networkCallbacks[network](url, callback);
