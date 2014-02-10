@@ -14,6 +14,7 @@ app.all('/*', function(req, res, next) {
   // Allow the request to be pulled cross domain
  
   var allowedHost = [
+    'http://tfrce-social-buttons.herokuapp.com',
     'http://dev.stopwatching.us',
     'http://rally.stopwatching.us',
     'http://2.stopwatching.us',
