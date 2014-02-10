@@ -1,6 +1,11 @@
 {
   "name": "social-button-server",
   "version": "0.0.2",
+  "description": "Install social share counters on your website with your own hosted solution which only makes 1 API request and loads minimal or zero assets to display the counters.",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/tfrce/social-buttons-server.git"
+  },
   "dependencies": {
     "async": "~0.2.10",
     "cors": "~2.1.1",
