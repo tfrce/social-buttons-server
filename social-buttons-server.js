@@ -13,6 +13,7 @@ app.use(express.logger());
 
 var whitelist = [
   'http://tfrce-social-buttons.herokuapp.com',
+  'http://social-buttons-server.herokuapp.com',
   'http://dev.stopwatching.us',
   'http://rally.stopwatching.us',
   'http://2.stopwatching.us',
@@ -22,7 +23,8 @@ var whitelist = [
   'https://2.stopwatching.us',
   'https://localhost:4000',
   'https://thedaywefightback.org',
-  'http://thedaywefightback.org'
+  'http://thedaywefightback.org',
+  'https://d28jjwuneuxo3n.cloudfront.net'
 ];
 
 var corsOptions = {
@@ -35,8 +37,17 @@ app.use(cors(corsOptions));
 
 app.options('*', cors(corsOptions));
 
+// Block all hosts not in the whitelist
+//app.use(function (req, res, next) {
+//  if (whitelist.indexOf(req.headers.origin) === -1) {
+//    return res.send({ blocked: true });
+//  }
+//
+//  next();
+//});
+
+// Setup caching headers (works well with cloudfront)
 app.use(function (req, res, next) {
-  // Setup caching headers (works well with cloudfront)
   res.setHeader('Expires', new Date(Date.now() + CACHE_TIME * 60 * 1000)
     .toUTCString());
 
@@ -128,6 +139,10 @@ app.get('/', function (req, res) {
   });
 
   async.parallel(networksToRequest, function (err, results) {
+    if (err && !results) {
+      return res.jsonp({ error: err });
+    }
+
     res.jsonp(results);
   });
 });
