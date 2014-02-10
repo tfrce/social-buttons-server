@@ -101,7 +101,7 @@ app.get('/', function (req, res) {
 
   // Check to see if a url was specified in the query else attempt to use the
   // referer url
-  if (!req.param('url')) {
+  if (req.param('url')) {
     url = req.param('url');
   } else {
     url = req.header('Referer');
