@@ -4,7 +4,7 @@ var express = require('express');
 var request = require('request');
 
 // How many minutes should we cache the results for a given request
-var CACHE_TIME = process.env.CACHE_TIME || 4;
+var CACHE_TIME = process.env.CACHE_TIME || 4 * 60;
 var PORT = process.env.PORT || 5000;
 
 var app = express();
@@ -12,18 +12,17 @@ var app = express();
 app.use(express.logger());
 
 var whitelist = [
-  'http://tfrce-social-buttons.herokuapp.com',
+  'http://localhost:4000',
+  'https://localhost:4000',
   'http://social-buttons-server.herokuapp.com',
   'http://dev.stopwatching.us',
-  'http://rally.stopwatching.us',
-  'http://2.stopwatching.us',
-  'http://localhost:4000',
   'https://dev.stopwatching.us',
+  'http://rally.stopwatching.us',
   'https://rally.stopwatching.us',
+  'http://2.stopwatching.us',
   'https://2.stopwatching.us',
-  'https://localhost:4000',
-  'https://thedaywefightback.org',
   'http://thedaywefightback.org',
+  'https://thedaywefightback.org',
   'https://d28jjwuneuxo3n.cloudfront.net'
 ];
 
@@ -48,8 +47,7 @@ app.options('*', cors(corsOptions));
 
 // Setup caching headers (works well with cloudfront)
 app.use(function (req, res, next) {
-  res.setHeader('Expires', new Date(Date.now() + CACHE_TIME * 60 * 1000)
-    .toUTCString());
+  res.setHeader('Cache-Control: max-age=' + CACHE_TIME);
 
   next();
 });
