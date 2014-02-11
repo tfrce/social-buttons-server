@@ -32,10 +32,6 @@ var corsOptions = {
   }
 };
 
-app.use(cors(corsOptions));
-
-app.options('*', cors(corsOptions));
-
 // Block all hosts not in the whitelist
 //app.use(function (req, res, next) {
 //  if (whitelist.indexOf(req.headers.origin) === -1) {
@@ -51,6 +47,10 @@ app.use(function (req, res, next) {
 
   next();
 });
+
+app.use(cors(corsOptions));
+
+app.options('*', cors(corsOptions));
 
 var networkCallbacks = {
   twitter: function (url, callback) {
