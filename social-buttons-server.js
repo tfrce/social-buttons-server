@@ -47,7 +47,7 @@ app.options('*', cors(corsOptions));
 
 // Setup caching headers (works well with cloudfront)
 app.use(function (req, res, next) {
-  res.setHeader('Cache-Control: max-age=' + CACHE_TIME);
+  res.set('Cache-Control', 'max-age=' + CACHE_TIME);
 
   next();
 });
