@@ -1,5 +1,7 @@
 # Social Buttons Server
 
+[![Join the chat at https://gitter.im/tfrce/social-buttons-server](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/tfrce/social-buttons-server?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 
 Install social share counters on your website with your own hosted solution which only makes 1 API request and loads minimal or zero assets to display the counters.
 
