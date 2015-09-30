@@ -16,7 +16,7 @@ Because you run the middle man server your self, you are also defending your use
 * Heroku enabled, create an app and deploy instantly
 * Has cache control variable(default 4 mins) so you can throw CloudFront in front with ease which result in faster API calls and less chance of getting rate limited
 
-## Getting started
+## Getting started 
 
 1. Clone(or fork) the repository
 2. Install dependencies ```npm install```
